@@ -55,7 +55,7 @@ function GameRules(){
         DisplayWinner.innerHTML = '<h1>X Wins</h1>'  
     }
     // Horizontal check for O
-    else if ((box1 == 'O' && box2 == 'O'  && box3 == 'O')|| (box4 == 'O' && box5 == 'O'  && box6 == 'X') || (box7 == 'O' && box8 == 'O'  && box9 == 'O')){
+    else if ((box1 == 'O' && box2 == 'O'  && box3 == 'O')|| (box4 == 'O' && box5 == 'O'  && box6 == 'O') || (box7 == 'O' && box8 == 'O'  && box9 == 'O')){
         Winner = true;
         DisplayWinner.innerHTML = '<h1>O Wins</h1>' 
     } 
@@ -65,7 +65,7 @@ function GameRules(){
         DisplayWinner.innerHTML = '<h1>X Wins</h1>' 
     } 
     //Vertical Check for O
-    else if ((box1 == 'O' && box4 == 'O'  && box7 == 'O')|| (box2 == 'O' && box5 == 'O'  && box8 == 'X') || (box3 == 'O' && box6 == 'O'  && box9 == 'O')){
+    else if ((box1 == 'O' && box4 == 'O'  && box7 == 'O')|| (box2 == 'O' && box5 == 'O'  && box8 == 'O') || (box3 == 'O' && box6 == 'O'  && box9 == 'O')){
         Winner = true;
         DisplayWinner.innerHTML = '<h1>O Wins</h1>' 
     } 
