@@ -2,6 +2,7 @@
 let canvases = document.querySelectorAll('canvas');
 let Winner = false;
 let Xstatus = false;
+
 let MultiPlayer = null;
 let SinglePlayer = null
 
@@ -79,6 +80,16 @@ function GameRules(){
         Winner = true;
         DisplayWinner.innerHTML = '<h1>O Wins</h1>' 
     } 
+    //Check For Draw
+    else{
+        let checkDraw = false
+        boxes.forEach((i)=>{if(i.getAttribute('data-content')=='Nothing'){checkDraw = true}})
+        if(!checkDraw){
+            Winner = true;
+            DisplayWinner.innerHTML = '<h1>Draw</h1>' 
+
+        }
+    }
 
     
 }
