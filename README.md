@@ -1,2 +1,2 @@
 # Simple-Tic-Tac-Toe-Game
-I'm creating a simple tic tac toe game to practice DOM manipulation using JavaScript and JavaScript Modules
+In this Project, I practiced using JS Modules, Manipulating DOM elements using JS, and Functions that depends on other functions and Managing them
