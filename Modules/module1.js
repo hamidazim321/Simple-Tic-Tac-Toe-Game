@@ -2,7 +2,7 @@
 let canvases = document.querySelectorAll('canvas');
 let Winner = false;
 let Xstatus = false;
-
+let Startgame = null;
 let MultiPlayer = null;
 let SinglePlayer = null
 
@@ -14,6 +14,21 @@ function addEventListenerList(list, event, fn) {
     }
 }
 
+function Restart(){
+    //height and Width
+    let gameScreen = document.getElementById('Game-Screen')
+    gameScreen.hidden = true;
+
+    let NewFront = document.getElementById('Front')
+    NewFront.hidden = false;
+    let ScreenStyles = window.getComputedStyle(gameScreen)
+    let height = ScreenStyles.getPropertyValue('height');
+    NewFront.style.height = height
+
+    //Add Event Listener 
+    let Startbtn = document.getElementById('Start')
+    Startbtn.addEventListener('click',function(){Start()})
+}
 
 // Insert X or O to each box on click
 function MakeXO(box){    
@@ -36,6 +51,20 @@ function MakeXO(box){
     }
 }
 
+// Clear Boxes
+
+function ClearBoxes (){
+    let boxes = document.getElementsByTagName('canvas');
+    for (let i=0; i < boxes.length; i++){
+        let ctx = boxes[i].getContext('2d')
+        ctx.clearRect(0, 0, boxes[i].width, boxes[i].height);
+        boxes[i].setAttribute('data-content', 'Nothing')
+        Winner = false;
+        Xstatus = false;
+    }
+
+}
+
 // Check for winner of the game
 function GameRules(){
     const DisplayWinner = document.getElementById('Result')
@@ -53,32 +82,43 @@ function GameRules(){
     // Horizontal check for X
     if ((box1 == 'X' && box2 == 'X'  && box3 == 'X')|| (box4 == 'X' && box5 == 'X'  && box6 == 'X') || (box7 == 'X' && box8 == 'X'  && box9 == 'X')){
         Winner = true;
-        DisplayWinner.innerHTML = '<h1>X Wins</h1>'  
+        Restart()
+    
+        DisplayWinner.innerText = 'X Wins' 
     }
     // Horizontal check for O
     else if ((box1 == 'O' && box2 == 'O'  && box3 == 'O')|| (box4 == 'O' && box5 == 'O'  && box6 == 'O') || (box7 == 'O' && box8 == 'O'  && box9 == 'O')){
         Winner = true;
-        DisplayWinner.innerHTML = '<h1>O Wins</h1>' 
+        Restart()
+    
+        DisplayWinner.innerText = 'O Wins' 
     } 
     // Vertical Check for X
     else if ((box1 == 'X' && box4 == 'X'  && box7 == 'X')|| (box2 == 'X' && box5 == 'X'  && box8 == 'X') || (box3 == 'X' && box6 == 'X'  && box9 == 'X')){
         Winner = true;
-        DisplayWinner.innerHTML = '<h1>X Wins</h1>' 
+        Restart()
+   
+        DisplayWinner.innerText = 'X Wins' 
     } 
     //Vertical Check for O
     else if ((box1 == 'O' && box4 == 'O'  && box7 == 'O')|| (box2 == 'O' && box5 == 'O'  && box8 == 'O') || (box3 == 'O' && box6 == 'O'  && box9 == 'O')){
         Winner = true;
-        DisplayWinner.innerHTML = '<h1>O Wins</h1>' 
+        Restart()
+     
+        DisplayWinner.innerText = 'O Wins' 
     } 
     //Parrallel check for X
     else if ((box1 == 'X' && box5 == 'X'  && box9 == 'X')|| (box3 == 'X' && box5 == 'X'  && box7 == 'X')){
         Winner = true;
-        DisplayWinner.innerHTML = '<h1>X Wins</h1>' 
+        Restart()
+        DisplayWinner.innerText = 'X Wins'
     } 
     //Parrallel check for O
     else if ((box1 == 'O' && box5 == 'O'  && box9 == 'O')|| (box3 == 'O' && box5 == 'O'  && box7 == 'O')){
         Winner = true;
-        DisplayWinner.innerHTML = '<h1>O Wins</h1>' 
+        Restart()
+    
+        DisplayWinner.innerText = 'O Wins' 
     } 
     //Check For Draw
     else{
@@ -86,7 +126,8 @@ function GameRules(){
         boxes.forEach((i)=>{if(i.getAttribute('data-content')=='Nothing'){checkDraw = true}})
         if(!checkDraw){
             Winner = true;
-            DisplayWinner.innerHTML = '<h1>Draw</h1>' 
+            Restart()
+            DisplayWinner.innerText = '<h1>Draw</h1>' 
 
         }
     }
@@ -103,18 +144,16 @@ function PlayMultiPlayer(n){
     }
     
 }
+// Add the event listener to the start game variable
 
 
-// Functions for Single-Player Games
 
-function UserVSpc(n){
-    userX = []
-    PcY = []
-
-    if (!Winner && n.getAttribute('data-content')=='Nothing' && !xStatus){
-        MakeXO(n)
-        GameRules()
-        userX.push(n)
-    }
+function Start(){
+    let GameDisplay = document.getElementById('Game-Screen')
+    let Front = document.getElementById('Front')
+    Front.hidden = true
+    GameDisplay.hidden = false
+    ClearBoxes ()
 }
-export {MakeXO,addEventListenerList,GameRules, PlayMultiPlayer,canvases}
+
+export {MakeXO,addEventListenerList,GameRules, PlayMultiPlayer,canvases, Restart}
